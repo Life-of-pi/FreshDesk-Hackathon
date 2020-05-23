@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freshdesk API</title>
+
+    <!-- font-awesome -->
+    <!-- <script src="https://kit.fontawesome.com/ac0c962c0e.js" crossorigin="anonymous"></script> -->
+
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="css/ticket.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+    <!-- bootstrap scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <!-- 
+    <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
+</head>
+
+<body>
+    <section id="api-sec">
+        <div class="container">
+
+            <!-- navbar -->
+
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a class="navbar-brand" href="#"><img src="pictures/freshdesk_logo.png" alt=""></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Apps</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- onclick="ListAllTickets();" -->
+            <!-- Tabs for tickets and contacts -->
+            <div class="row mt-3 p-3" id="fetchData">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" onclick="ListAllTickets();"  id="tickets-tab" data-toggle="tab" href="#tickets" role="tab"
+                            aria-controls="tickets" aria-selected="true">Tickets</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" onclick="ListContacts();" id="contacts-tab" data-toggle="tab" href="#contacts" role="tab"
+                            aria-controls="contacts" aria-selected="false">Contacts</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="new-tab" data-toggle="tab" href="#new-create" role="tab"
+                            aria-controls="new-create" aria-selected="false">New</a>
+                    </li>
+                </ul>
+
+                <!-- tabs -->
+                <div class="tab-content">
+
+                    <!-- tab-pane for tickets tab -->
+                    <div class="tab-pane fade show active" id="tickets" role="tabpanel" aria-labelledby="tickets-tab">
+                        <div class="container" style="padding-left: 0 !important;">
+                            <div class="card-deck" id="tickets-deck">
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- tab-pane for contact tab -->
+                    <div class="tab-pane fade" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
+
+                        <div class="row pl-4" style="width: 100%; min-width: 100%;">
+                            <table class="table table-bordered table-hover" style="width: 100%; min-width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Contact ID</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Phone</th>
+                                        <th>Update</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="contact-list-body">
+                                    <!-- <tr id="contacts-list-row-id">
+                                        <th id="contacts-list-id" scope="row">1</th>
+                                        <td id="contacts-name-id">Mark</td>
+                                        <td id="contacts-email-id">Otto</td>
+                                        <td id="contacts-phone-id">@mdo</td>
+                                        <td id="contacts-list-update-id">
+                                            <button class="btn btn-success" id="contact-update-id-${}">
+                                                Update Contact
+                                            </button>
+                                        </td>
+                                    </tr> -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                    <!-- Modal -->
+
+
+                    <!-- tab-pane for create ticket and contact tab -->
+                    <div class="tab-pane fade" id="new-create" role="tabpanel" aria-labelledby="new-create-tab">
+
+                        <div class="container-fluid" style="padding-left: 0 !important;">
+                            <div class="row">
+                                <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                    of the card's content.</p> -->
+
+                                <!-- // card for creating ticket -->
+                                <div class="card-deck m-5" id="tickets-deck">
+                                    <div class="card border-dark m-2" style="min-width: 100%;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Create New Ticket</h5>
+
+                                            <div class="form-group">
+                                                <label for="title">Name</label>
+                                                <input type="title" class="form-control" required id="name-ticket">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="title">Ticket Title</label>
+                                                <input type="title" class="form-control" required id="title">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="desc">Ticket Description</label>
+                                                <input type="desc" class="form-control" required id="desc">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="email">Email address</label>
+                                                <input type="email" class="form-control" required id="email">
+                                            </div>
+                                            <button class="btn btn-success" id="createTicket-btn">Create Ticket</button>
+                                        </div>
+                                    </div>
+
+                                    <!-- card for creating contact -->
+                                    <div class="card border-dark m-2" style="min-width: 100%;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Create New Contact</h5>
+
+                                            <div class="form-group">
+                                                <label for="text">Full Name:</label>
+                                                <input type="text" class="form-control" required id="full-name">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="email">Email:</label>
+                                                <input type="email" class="form-control" required id="contact-email">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="contact-number">Contact:</label>
+                                                <input type="tel" class="form-control" required id="contact-number"
+                                                    placeholder="7589400885" pattern="[0-9]{10}">
+                                            </div>
+
+                                            <button class="btn btn-warning" id="createContact-btn">Create Contact</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Modal  -->
+                <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                    role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <div class="modal-body">
+                                <!-- form -->
+                                <!-- <div class="form-group">
+                                    <label for="text">ID of the contact:</label>
+                                    <input type="text" class="form-control" required id="id-contact">
+                                </div> -->
+
+                                <div class="form-group">
+                                    <label for="text">Full Name:</label>
+                                    <input type="text" class="form-control" required id="update-full-name">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email">Email:</label>
+                                    <input type="email" class="form-control" required id="update-contact-email">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="contact-number">Contact:</label>
+                                    <input type="tel" class="form-control" required id="update-contact-number"
+                                        placeholder="7589400885" pattern="[0-9]">
+                                </div>
+
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" onclick="APIUpdateContact();" id="update-contact-submit" class="btn btn-primary"
+                                    data-dismiss="modal">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</body>
+<script src="scripts/index3.js"></script>
+<script src="scripts/updateTicket.js"></script>
+<script src="scripts/deleteTicket.js"></script>
+<script src="scripts/createTicket.js"></script>
+
+<script src="scripts/contactList.js"></script>
+<script src="scripts/contactUpdate.js"></script>
+<script src="scripts/contactDelete.js"></script>
+<script src="scripts/contactCreate.js"></script>
+</html>
+
+
+<!-- card perfect -->
+<!-- 
+<div class="card mb-4" style="min-width:100%;">
+
+    <img class="card-img-top" src="..." alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">Created at 3pm on 22/10/2020</small>
+    </div>
+  </div> -->
+
+
+
+
+<!-- create ticket -->
+<!-- <div class="text-center" style="margin: 0 auto;">
+    <h1>New Card Ticket & Contact</h1>
+
+    <div class="card border-dark mb-3" style="min-width: 100%;">
+        <div class="card-header">
+            <h1>Create New Ticket </h1>
+        </div>
+        <div class="card-body text-dark">
+
+
+        </div>
+    </div>
+
+</div>
+
+ create contact 
+<div class="text-center" style="margin: 0 auto;">
+    <div class="card border-dark mb-3" style="min-width: 100%;">
+        <div class="card-header">
+            <h1>Create New Ticket </h1>
+        </div>
+        <div class="card-body text-dark">
+
+
+        </div>
+    </div>
+
+</div>
+
+Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore excepturi sapiente magnam laboriosam autem quis. -->

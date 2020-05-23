@@ -1,0 +1,20 @@
+https://${domainName}/api/v2/search/tickets?query="status:${status}
+
+https://${domainName}/api/v2/search/tickets?query="status:${status}
+
+
+https://rajvardhank91.freshdesk.com/api/v2/tickets
+Rwebdev@31
+
+key 4MXp8f9YR6TCQhSAPtR
+
+
+sample 1
+I've ordered an trimmer from your site and didnt recieve the charging cable for it.
+hopeitworks@gmail.com
+
+
+curl -v -u user@yourcompany.com:test -H "Content-Type: application/json"
+ -d '{ "description": "Details about the issue...", "subject": "Support Needed...", "email": "tom@outerspace.com", 
+"priority": 1, "status": 2, "cc_emails": ["ram@freshdesk.com","diana@freshdesk.com"] }' -X
+ POST 'https://rajvardhank91.freshdesk.com/api/v2/tickets'
