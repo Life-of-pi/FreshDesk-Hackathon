@@ -1,5 +1,5 @@
 // document.getElementById("createTicket-btn").addEventListener("click", () => {
-    
+
 //     var title = document.getElementById("title").value;
 
 //     var description = document.getElementById("desc").value;
@@ -15,25 +15,25 @@
 //     }
 // });
 
-function createTicket(){
+function createTicket() {
     var title = document.getElementById("title").value;
 
     var description = document.getElementById("desc").value;
 
     var email = document.getElementById("email").value;
 
-    var name =document.getElementById("name-ticket").value;
+    var name = document.getElementById("name-ticket").value;
 
     if (title && description && email && name) {
-        createFreshdeskTicket(title, description, email,name);
+        createFreshdeskTicket(title, description, email, name);
     } else {
         alert('Please Fill all the details');
     }
 }
 
-function createFreshdeskTicket(title, description, email,name) {
+function createFreshdeskTicket(title, description, email, name) {
     // let api_key = '4MXp8f9YR6TCQhSAPtR';
-    fetch("https://"+tickets.yourdomain+".freshdesk.com/api/v2/tickets", {
+    fetch("https://" + tickets.yourdomain + ".freshdesk.com/api/v2/tickets", {
 
         method: "POST",
         body: JSON.stringify({
@@ -51,17 +51,25 @@ function createFreshdeskTicket(title, description, email,name) {
         }
     })
         .then((response) => {
-            console.log("near clear input fields");
-
+            return response.json();
+        })
+        .then(function (jsonData) {
+            if (jsonData) {
+                let myAlert = document.getElementById('myAlert');
+                // Show the alert box
+                myAlert.style.display = 'block';
+                // Override Bootstrap's standard close action
+                myAlert.querySelector('button[data-hide]').addEventListener('click', function () {
+                    myAlert.style.display = 'none';
+                });
+                setTimeout(() => {
+                    myAlert.style.display = 'none';
+                }, 5000);
+            }
             document.getElementById("name-ticket").value = "";
             document.getElementById("desc").value = "";
             document.getElementById("title").value = "";
             document.getElementById("email").value = "";
-            
-            return response.json();
-        })
-        .then(function (jsonData) {
-            console.log(jsonData);
         })
         .catch((error) => {
             console.error(error);

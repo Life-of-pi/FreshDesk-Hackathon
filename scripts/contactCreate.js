@@ -37,7 +37,18 @@ function createFreshdeskContact(nameContact, emailContact, phoneContact){
             return response.json();
         })
         .then(function (jsonData) {
-            console.log(jsonData);
+            if (jsonData) {
+                let myAlert = document.getElementById('myAlert-contact');
+                // Show the alert box
+                myAlert.style.display = 'block';
+                // Override Bootstrap's standard close action
+                myAlert.querySelector('button[data-hide]').addEventListener('click', function () {
+                    myAlert.style.display = 'none';
+                });
+                setTimeout(() => {
+                    myAlert.style.display = 'none';
+                }, 5000);
+            }
         })
         .catch((error) => {
             console.error(error);
