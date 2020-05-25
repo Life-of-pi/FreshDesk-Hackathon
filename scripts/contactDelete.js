@@ -7,7 +7,6 @@ function DeleteContact(x){
 function DeleteContactUIElement(id){
     let contactsRowDelete = document.getElementById(`contacts-list-row-id-${id}`);
     contactsRowDelete.parentNode.removeChild(contactsRowDelete);
-    alert("Contact is removed");
 }
 
 
@@ -22,7 +21,6 @@ function APIContactDelete(deleteContactId) {
         }
     })
         .then(() => {
-            alert('success', 'Ticket is successfully deleted');
             clearInputfields();
         })
         .catch((error) => {

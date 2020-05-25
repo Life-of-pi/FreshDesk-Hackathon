@@ -7,7 +7,6 @@ function DeleteTicket(x){
 function DeleteUIElement(id){
     let ticketCard = document.getElementById(`card-ticket-id-${id}`);
     ticketCard.parentNode.removeChild(ticketCard);
-    console.log("Elemetn is removed");
 }
 
 function APIDelete(id){
@@ -21,10 +20,10 @@ function APIDelete(id){
         }
     })
     .then((response)=>{
-        alert('success');
+
     })
     .catch((error) => {
         console.error(error);
-        alert('danger', 'Unable to create ticket');
+        alert('Please try after some time');
     });
 }

@@ -1,5 +1,3 @@
-// document.getElementById("login-btn").addEventListener("click",()=>{
-
 function logMeIn(){
     let userName = (document.getElementById("username-id").value).trim();
     let apiKey = (document.getElementById("api-id").value).trim();
@@ -11,5 +9,4 @@ function logMeIn(){
     }
 }
    
-// });
 

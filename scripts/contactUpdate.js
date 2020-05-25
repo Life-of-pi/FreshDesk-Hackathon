@@ -6,7 +6,6 @@ Contacts.cid = "";
 function UpdateContact(x) {
     Contacts.cid = "";
     let cid = x.id.replace(/[^0-9]/g, '');
-    console.log('cid' + cid);
     Contacts.cid = cid;
 
     // After Pressing the update button all input values should have values from the contact
@@ -21,14 +20,14 @@ function APIUpdateContact() {
 
     // Take values from update contact from Model
     let nameContactUpdate = document.getElementById("update-full-name").value;
-    console.log(nameContactUpdate);
+  
     let emailContactUpdate = document.getElementById("update-contact-email").value;
-    console.log(emailContactUpdate);
+
     let phoneContactUpdate = document.getElementById("update-contact-number").value;
-    console.log(phoneContactUpdate);    
+
 
     let contactId = Contacts.cid;
-    console.log('contactId'+contactId);
+ 
 
     if (nameContactUpdate && emailContactUpdate && phoneContactUpdate && contactId) {
         // make changes in UI
@@ -37,7 +36,7 @@ function APIUpdateContact() {
         document.getElementById(`contacts-phone-id-${Contacts.cid}`).innerHTML = phoneContactUpdate;
         updateFreshdeskContact(nameContactUpdate, emailContactUpdate, phoneContactUpdate, contactId);
     } else {
-        alert('danger', 'Ticket Values cannot empty, Fill all values');
+        alert('Please Try again after some time');
     }
 }
 
@@ -58,16 +57,13 @@ function updateFreshdeskContact(nameContactUpdate, emailContactUpdate, phoneCont
         }
     })
         .then((response) => {
-            alert('success', 'Ticket is successfully created');
             clearInputfields();
         })
         .then(function (jsonData) {
-            console.log("After Updating contact from API");
-            console.log(jsonData);
         })
         .catch((error) => {
             console.error(error);
-            alert('danger', 'Unable to create ticket');
+            alert('Please Try Again after sometime');
         });
 }
 

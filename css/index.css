@@ -1,14 +1,4 @@
-
 /* navbar */
-
-.navbar{
-    padding: 1rem 0 !important;
-}
-#navbar-id{
-    position: sticky;
-    top: 0;
-    z-index: 10;
-}
 
 /* logo image */
 .navbar-brand img{
@@ -17,32 +7,26 @@
     padding-left: 0;
 }
 
-.navbar-nav li{
-    padding: 0 10px;
+.navbar-nav ul li{
+    width: 85px;
 }
 
-.navbar-nav li a{
+.navbar-nav ul li a{
     font-weight: 700;
     float: right;
-    text-align: left;
 }
-
-.navbar-toggler{
-    outline: none !important;
-}
-
-.color-text{
-    color: white !important;
-}
-
-
-
-/* fetures */
-.btn{
+.sign-in-btn-class{
+    width: 69px !important;
     font-weight: 700 !important;
     background-color: #00c26a !important;
     color: white !important;
 }
+
+/* fetures */
+#intro-row{
+    padding-left: 15px;
+}
+
 #intro{
     color: #4c4c4c;
 }
@@ -54,11 +38,23 @@
 #intro h1{
     padding-top: 4rem;
 }
-/* #features{
-    padding-top: 5%;
-} */
+
 
 #landing-img{
     height: 500px;
     margin-top: 2rem;
 }
+
+@media only screen and (max-width: 600px) {
+    #landing-img{
+        width:95%;
+        height: 400px;
+        margin-top: 1rem;
+    }
+  }
+  
+  @media only screen and (min-width: 900px) {
+    .sign-in-btn-class{
+        width: 90px !important;
+    }
+  }

@@ -6,22 +6,15 @@
 
 // Get the variable
 var dataFromLogin = localStorage['objectToPass'];
-console.log(dataFromLogin);
-localStorage.removeItem( 'objectToPass' ); // Clear the localStorage
-console.log("data From login");
+
+// localStorage.removeItem( 'objectToPass' ); // Clear the localStorage
+
 dataFromLoginArr = dataFromLogin.split(',');
-// console.log(dataFromLogin);
-// console.log(typeof dataFromLogin);
-console.log(dataFromLoginArr);
 var domainName = dataFromLoginArr[0];
 var apiKey = dataFromLoginArr[1];
 
-alert('firstData: ' + domainName + '\nsecondData: ' + apiKey);
-
 
 tickets = {};
-// tickets.yourdomain = 'rajvardhank91';
-// tickets.api_key = '4MXp8f9YR6TCQhSAPtR';
 tickets.yourdomain = domainName;
 tickets.api_key = apiKey;
 tickets.statusArray = {2:"Open",3:"Pending",4:"Resolved",5:"Closed"};
@@ -41,11 +34,11 @@ function ListAllTickets(){
         }
     })
         .then(function (response) {
-            //     return response.txt();
             return response.json();
         })
         .then(function (jsonData) {
-            console.log(jsonData);
+            
+            document.getElementById("tickets-deck").innerHTML = "";
             ticketsIds = [];
             ticketsIds.length = 0;
             if(tickets.Ids.length){
@@ -53,14 +46,9 @@ function ListAllTickets(){
             }
            
             for (let i = 0; i < jsonData.length; i++) {
-                // console.log("Inside for loop and i = " + i);
-                // console.log("inside fetch ");
-                // console.log(ticketsIds);
                 ticketsIds.push(jsonData[i].id);
                 tickets.Ids.push(jsonData[i].id);
             }
-
-            console.log(ticketsIds);
 
             for (let i = 0; i < ticketsIds.length; i++) {
                 createUIcard(i,ticketsIds);
@@ -85,9 +73,6 @@ function ListAllTickets(){
                 return response.json();
             })
             .then(function (jsonData) {
-                // console.log("Loop 222 count: " + i);
-                // console.log("Ticket id = " + jsonData.id);
-                console.log(jsonData);
                 let ticketsTab2 = document.getElementById("tickets-deck");
                 let cardTicket = `
                                  <div class="card border-dark mb-4" id= "card-ticket-id-${jsonData.id}" style="min-width:100%;  overflow: auto;">

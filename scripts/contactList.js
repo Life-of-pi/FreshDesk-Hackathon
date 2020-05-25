@@ -9,11 +9,9 @@ function ListContacts(){
         }
     })
     .then((response)=>{
-        alert("Success");
         return response.json();
     })
     .then(jsonData =>{
-        console.log(jsonData);
         document.getElementById("contact-list-body").innerHTML = "";
         for(let i=0; i<jsonData.length; i++){
             createUiContactsList(jsonData[i]);

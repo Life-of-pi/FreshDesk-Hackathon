@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="card border-dark mb-4" id= "card-ticket-id-${jsonData.id}" style="min-width:100%;  overflow: auto;">
+        <div class="card-header">
+            <h5>${jsonData.subject} <span class="badge badge-info" id="priority-id-${jsonData.id}">${tickets.priorityArray[jsonData.priority]}</span> <span
+                    class="badge badge-warning" id="status-id-${jsonData.id}">${tickets.statusArray[jsonData.status]}</span> </h5>
+        </div>
+        <div class="card-body">
+            <p class="card-title" id="name-ticket-${jsonData.id}">${jsonData.requester.name}</p>
+            <p class="card-text"><i class="fas fa-envelope"></i> ${jsonData.requester.email}</p>
+            <p>ID: ${jsonData.id}</p>
+            <div class="description">${jsonData.description}</div>
+
+            <p class="mt-4 btns-update-delete">
+                <a class="btn btn-outline-dark" id="update-btn-id-${jsonData.id}" data-toggle="collapse" href="#collapseExample-${jsonData.id}"
+                    role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Update
+                </a>
+                <button class="btn btn-outline-danger" onclick="DeleteTicket(this);" id="delete-id-${jsonData.id}">Delete</button>
+            </p>
+            <div class="collapse" id="collapseExample-${jsonData.id}">
+                <div class="card card-body">
+                    <select name="statusUpdates" class="m-2 p-2" id="update-status-${jsonData.id}">
+                        <option value="2">Open</option>
+                        <option value="3">Pending</option>
+                        <option value="4">Resolved</option>
+                        <option value="5">Closed</option>
+                    </select>
+                    <select name="priorityUpdates" class="m-2 p-2" id="update-priority-${jsonData.id}">
+                        <option value="1">Low</option>
+                        <option value="2">Medium</option>
+                        <option value="3">High</option>
+                        <option value="4">Urgent</option>
+                    </select>
+
+                    <button class="btn btn-primary submit-btn" onclick = "Submit_UpdateTicket(this);" id="submit-update-id-${jsonData.id}" data-toggle="collapse" href="#collapseExample-${jsonData.id}"
+                    role="button" aria-expanded="false" aria-controls="collapseExample">Submit</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

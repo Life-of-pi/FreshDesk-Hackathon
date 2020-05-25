@@ -12,7 +12,7 @@ document.getElementById("createContact-btn").addEventListener("click", () => {
     if (nameContact && emailContact && phoneContact) {
         createFreshdeskContact(nameContact, emailContact, phoneContact);
     } else {
-        alert('danger', 'Ticket Values cannot empty, Fill all values');
+        alert('Please try after some time unable to create ticket');
     }
 });
 
@@ -33,7 +33,6 @@ function createFreshdeskContact(nameContact, emailContact, phoneContact){
         }
     })
         .then((response) => {
-            alert('success : Contact is successfully created');
             clearInputfields();
             return response.json();
         })
@@ -42,7 +41,7 @@ function createFreshdeskContact(nameContact, emailContact, phoneContact){
         })
         .catch((error) => {
             console.error(error);
-            alert('danger Unable to create Contact');
+            alert('Please Try After some time. Unable to create contact');
         });
 }
 
