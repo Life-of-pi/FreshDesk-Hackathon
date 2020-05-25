@@ -1,5 +1,9 @@
 /* navbar */
-
+/* .test{
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+} */
 .navbar{
     padding: 1rem 0 !important;
 }
